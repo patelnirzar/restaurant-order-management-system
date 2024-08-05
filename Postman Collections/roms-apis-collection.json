@@ -14,6 +14,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\":\"biller01\",\n    \"Name\":\"Nirzar Patel\",\n    \"Email\":\"nirzar@dev.com\",\n    \"Password\":\"test\",\n    \"Contact\":\"9998467235\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": "localhost:9292/api/v1/users/create"
 			},
 			"response": []

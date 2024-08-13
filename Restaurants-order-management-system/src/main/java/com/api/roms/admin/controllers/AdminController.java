@@ -1,4 +1,4 @@
-package com.api.roms.controllers;
+package com.api.roms.admin.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Role;

@@ -65,7 +65,7 @@ public class SecurityConfig  {
 	            .requestMatchers("/api/v1/auth/login/**")
 	            .permitAll()
 	            .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
-	            .requestMatchers("/api/v1/user/**").hasRole("USER")
+	            .requestMatchers("/api/v1/user/**").hasAnyRole("USER","ADMIN")
 	            .anyRequest().authenticated()
 	        ).csrf(csrf -> csrf.disable())
 			.exceptionHandling(ex->ex.authenticationEntryPoint(point))

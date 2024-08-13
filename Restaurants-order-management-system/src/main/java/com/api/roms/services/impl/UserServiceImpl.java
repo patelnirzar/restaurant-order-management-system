@@ -1,5 +1,8 @@
 package com.api.roms.services.impl;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.modelmapper.ModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +34,22 @@ public class UserServiceImpl implements UserService {
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public User createUser(User user) {
+	public UserDto createUser(User user) {
+		Set<Role> LocalUserRoles = new HashSet<Role>();
 		User localUser= user;
 		user.setPassword(passwordEncoder.encode(localUser.getPassword()));
 		
-		// roles
-		Role role = this.roleRepo.findById(AppConstants.NORMAL_USER).get();
-		user.getRoles().add(role);
-		
+		// roles 
+		for(Role role: user.getUserRoles()) {
+			Role repoRole = this.roleRepo.findById(role.getId()).get();
+			LocalUserRoles.add(repoRole);
+		}
+		user.setUserRoles(LocalUserRoles);
+			
 		User savedUser = this.userRepo.save(user);
-		return savedUser;
+		return userToDto(savedUser);
 	}
+	
 	
 	public User dtoToUser(UserDto userDto) {
 		User user = this.modelMapper.map(userDto, User.class);
@@ -52,5 +60,7 @@ public class UserServiceImpl implements UserService {
 		UserDto userDto = this.modelMapper.map(user, UserDto.class);
 		return userDto;
 	}
+
+	
 
 }

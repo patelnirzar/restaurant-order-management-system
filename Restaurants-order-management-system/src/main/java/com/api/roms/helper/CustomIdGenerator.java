@@ -23,7 +23,7 @@ public class CustomIdGenerator implements IdentifierGenerator {
 					String lastId = rs.getString(1);
 					if (lastId != null) {
 						System.out.println("lastid :"+lastId);
-						int number = Integer.parseInt(lastId.substring(prefix.length()+1)) + 1;
+						int number = Integer.parseInt(lastId.substring(prefix.length())) + 1;
 						System.out.println("num:"+number);
 						return prefix + number;
 					}

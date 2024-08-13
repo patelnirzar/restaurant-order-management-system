@@ -39,80 +39,110 @@ public class User implements UserDetails {
 	@JoinTable(name = "user_role",
 	joinColumns = @JoinColumn(name="user",referencedColumnName = "user_id"),
 	inverseJoinColumns =@JoinColumn(name="role",referencedColumnName = "id") )
-	private Set<Role> roles = new HashSet<Role>();
+	private Set<Role> userRoles = new HashSet<Role>();
 	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String userId, String name, String email, String password, String contact, Set<Role> roles) {
+	
+	
+
+	public User(String userId, String name, String email, String password, String contact, Set<Role> userRoles) {
 		super();
 		this.userId = userId;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.contact = contact;
-		this.roles = roles;
+		this.userRoles = userRoles;
 	}
+
+	
+
+
 
 	public String getUserId() {
 		return userId;
 	}
 
+
+
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
+
+
 
 	public String getName() {
 		return name;
 	}
 
+
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
+
+
+
 	public String getEmail() {
 		return email;
 	}
+
+
+
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 
 	public String getContact() {
 		return contact;
 	}
 
+
+
+
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
 
-	
 
 
-	public Set<Role> getRoles() {
-		return roles;
+
+	public Set<Role> getUserRoles() {
+		return userRoles;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+
+
+
+	public void setUserRoles(Set<Role> userRoles) {
+		this.userRoles = userRoles;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", name=" + name + ", email=" + email + ", password=" + password
-				+ ", contact=" + contact + ", roles=" + roles + "]";
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
+
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<SimpleGrantedAuthority> authories = this.roles.stream()
+		List<SimpleGrantedAuthority> authories = this.userRoles.stream()
 				.map((role) -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 		return authories;
 	}
@@ -150,6 +180,15 @@ public class User implements UserDetails {
 	public boolean isEnabled() {
 		
 		return true;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", name=" + name + ", email=" + email + ", password=" + password
+				+ ", contact=" + contact + ", userRoles=" + userRoles + "]";
 	}
 
 

@@ -5,6 +5,6 @@ import com.api.roms.entities.User;
 
 public interface UserService {
 	
-	User createUser(User user);
+	public UserDto createUser(User user);
 
 }

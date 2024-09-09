@@ -1,0 +1,48 @@
+package com.api.roms.controllers;
+
+import org.apache.coyote.http11.Http11InputBuffer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.api.roms.entities.Order;
+import com.api.roms.repositories.CustomerRepo;
+import com.api.roms.repositories.OrderItemRepo;
+import com.api.roms.repositories.OrderRepo;
+import com.api.roms.services.impl.OrderServiceImpl;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+@RestController
+@RequestMapping("/api/v1/user")
+public class OrderController {
+	
+	@Autowired
+	private OrderItemRepo orderItemRepo;
+	
+	@Autowired
+	private OrderRepo orderRepo;
+	
+	@Autowired
+	private CustomerRepo customerRepo;
+	
+	@Autowired
+	private OrderServiceImpl orderServiceImpl;
+	
+	
+	//create new order
+	@PostMapping("/order/create")
+	public ResponseEntity<Order> OrderCreate(@RequestBody Order order) {
+		
+		Order savedOrder = this.orderServiceImpl.createOrder(order);
+		
+		return new ResponseEntity<Order>(savedOrder,HttpStatus.CREATED);
+	}
+	
+	
+
+}

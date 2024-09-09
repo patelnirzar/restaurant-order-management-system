@@ -1,5 +1,8 @@
 package com.api.roms.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,19 +35,24 @@ public class Item {
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "cat_id")
 	private Category category;
+	
+	@OneToMany(mappedBy = "item",cascade =CascadeType.ALL,fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<OrderItem> orderItems= new ArrayList<OrderItem>();
 
 	public Item() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Item(String itemId, String name, int price, String size, Category category) {
+	public Item(String itemId, String name, int price, String size, Category category, List<OrderItem> orderItems) {
 		super();
 		this.itemId = itemId;
 		this.name = name;
 		this.price = price;
 		this.size = size;
 		this.category = category;
+		this.orderItems = orderItems;
 	}
 
 	public String getItemId() {
@@ -86,11 +95,21 @@ public class Item {
 		this.category = category;
 	}
 
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
+
 	@Override
 	public String toString() {
 		return "Item [itemId=" + itemId + ", name=" + name + ", price=" + price + ", size=" + size + ", category="
-				+ category + "]";
+				+ category + ", orderItems=" + orderItems + "]";
 	}
+
+	
 	
 	
 	

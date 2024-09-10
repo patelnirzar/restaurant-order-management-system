@@ -1,7 +1,9 @@
 package com.api.roms.entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -22,7 +24,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "item")
 public class Item {
-	
+
 	@Id
 	@GeneratedValue(generator = "custom-id", strategy = GenerationType.IDENTITY)
 	@GenericGenerator(name = "custom-id", strategy = "com.api.roms.helper.CustomItemIdGenerator")
@@ -31,21 +33,21 @@ public class Item {
 	private String name;
 	private int price;
 	private String size;
-	
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "cat_id")
 	private Category category;
-	
+
 	@OneToMany(mappedBy = "item",cascade =CascadeType.ALL,fetch = FetchType.LAZY)
 	@JsonIgnore
-	private List<OrderItem> orderItems= new ArrayList<OrderItem>();
+	private Set<OrderItem> orderItems= new HashSet<OrderItem>();
 
 	public Item() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Item(String itemId, String name, int price, String size, Category category, List<OrderItem> orderItems) {
+	public Item(String itemId, String name, int price, String size, Category category, Set<OrderItem> orderItems) {
 		super();
 		this.itemId = itemId;
 		this.name = name;
@@ -95,11 +97,11 @@ public class Item {
 		this.category = category;
 	}
 
-	public List<OrderItem> getOrderItems() {
+	public Set<OrderItem> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<OrderItem> orderItems) {
+	public void setOrderItems(Set<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
 
@@ -109,9 +111,6 @@ public class Item {
 				+ category + ", orderItems=" + orderItems + "]";
 	}
 
-	
-	
-	
 	
 
 }

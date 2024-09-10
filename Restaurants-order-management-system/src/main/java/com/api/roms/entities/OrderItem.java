@@ -2,6 +2,9 @@ package com.api.roms.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,38 +24,38 @@ public class OrderItem {
 	@GeneratedValue(generator = "custom-id", strategy = GenerationType.IDENTITY)
 	@GenericGenerator(name = "custom-id", strategy = "com.api.roms.helper.CustomOrderItemIdGenerator")
 	@Column(name = "order_item_id")
-	private String OrderItemId;
+	private String orderItemId;
 	private int qty;
-	private int total;
+	private double total;
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "item_id")
 	private Item item;
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_id")
-	private Order order;
+	private Orders orders;
 
 	public OrderItem() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderItem(String orderItemId, int qty, int total, Item item, Order order) {
+	public OrderItem(String orderItemId, int qty, double total, Item item, Orders orders) {
 		super();
-		OrderItemId = orderItemId;
+		this.orderItemId = orderItemId;
 		this.qty = qty;
 		this.total = total;
 		this.item = item;
-		this.order = order;
+		this.orders = orders;
 	}
 
 	public String getOrderItemId() {
-		return OrderItemId;
+		return orderItemId;
 	}
 
 	public void setOrderItemId(String orderItemId) {
-		OrderItemId = orderItemId;
+		this.orderItemId = orderItemId;
 	}
 
 	public int getQty() {
@@ -63,11 +66,11 @@ public class OrderItem {
 		this.qty = qty;
 	}
 
-	public int getTotal() {
+	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(int total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 
@@ -79,20 +82,25 @@ public class OrderItem {
 		this.item = item;
 	}
 
-	public Order getOrder() {
-		return order;
+	//added @JsonIgnore here to stop endless loop while fetching orderItem or Order obj
+	@JsonIgnore
+	public Orders getOrders() {
+		return orders;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrders(Orders orders) {
+		this.orders = orders;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderItem [OrderItemId=" + OrderItemId + ", qty=" + qty + ", total=" + total + ", item=" + item
-				+ ", order=" + order + "]";
+		return "OrderItem [orderItemId=" + orderItemId + ", qty=" + qty + ", total=" + total + ", item=" + item
+				+ ", orders=" + orders + "]";
 	}
 
+	
+	
+	
 	
 
 	

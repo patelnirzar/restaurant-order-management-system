@@ -15,7 +15,7 @@ public class CustomOrderIdGenerator implements IdentifierGenerator {
 	@Override
 	public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
 		String prefix = "order";
-		String query = "SELECT MAX(order_id) FROM order";
+		String query = "SELECT MAX(order_id) FROM orders";
 		Connection connection;
 		try {
 			connection = session.getJdbcConnectionAccess().obtainConnection();

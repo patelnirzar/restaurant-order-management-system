@@ -1,8 +1,8 @@
 package com.api.roms.services;
 
-import com.api.roms.entities.Order;
+import com.api.roms.entities.Orders;
 
 public interface OrderService {
 
-	public Order createOrder(Order order);
+	public Orders createOrder(Orders orders);
 }

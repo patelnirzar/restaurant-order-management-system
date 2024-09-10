@@ -2,7 +2,9 @@ package com.api.roms.entities;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,8 +20,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "customer")
+@Entity(name = "customer")
 public class Customer {
 	
 	@Id
@@ -33,14 +34,14 @@ public class Customer {
 	
 	@OneToMany(mappedBy = "customer",cascade =CascadeType.ALL,fetch = FetchType.LAZY)
 	@JsonIgnore
-	private List<Order> orders= new ArrayList<Order>();
+	private Set<Orders> orders= new HashSet<Orders>();
 
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer(String custId, String name, String contact, String address, List<Order> orders) {
+	public Customer(String custId, String name, String contact, String address, Set<Orders> orders) {
 		super();
 		this.custId = custId;
 		this.name = name;
@@ -81,11 +82,11 @@ public class Customer {
 		this.address = address;
 	}
 
-	public List<Order> getOrders() {
+	public Set<Orders> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(Set<Orders> orders) {
 		this.orders = orders;
 	}
 
@@ -94,6 +95,8 @@ public class Customer {
 		return "Customer [custId=" + custId + ", name=" + name + ", contact=" + contact + ", address=" + address
 				+ ", orders=" + orders + "]";
 	}
+
+	
 	
 	
 

@@ -39,6 +39,8 @@ public class UserServiceImpl implements UserService {
 		User localUser= user;
 		user.setPassword(passwordEncoder.encode(localUser.getPassword()));
 		
+		System.out.println("Roles : " + user.getUserRoles());
+		
 		// roles 
 		for(Role role: user.getUserRoles()) {
 			Role repoRole = this.roleRepo.findById(role.getId()).get();

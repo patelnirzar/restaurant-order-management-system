@@ -2,11 +2,15 @@ package com.api.roms.entities;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,15 +26,15 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Orders {
 	
 	@Id
 	@GeneratedValue(generator = "custom-id", strategy = GenerationType.IDENTITY)
 	@GenericGenerator(name = "custom-id", strategy = "com.api.roms.helper.CustomOrderIdGenerator")
 	@Column(name = "order_id")
 	private String orderID;
-	private Date orderDateTime;
-	private Date prepareDateTime;
+	private String orderDateTime;
+	private String prepareDateTime;
 	private String dispatchType;
 	private String orderType;
 	private int orderTotal;
@@ -39,22 +43,21 @@ public class Order {
 	private String orderStatus;
 	private String customerNote;
 	
-	@OneToMany(mappedBy = "order",cascade =CascadeType.ALL,fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<OrderItem> orderItems= new ArrayList<OrderItem>();
+	@OneToMany(mappedBy = "orders",cascade =CascadeType.ALL,fetch = FetchType.LAZY)
+	private Set<OrderItem> orderItems= new HashSet<OrderItem>();
 	
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "cust_id")
 	private Customer customer;
 
-	public Order() {
+	public Orders() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(String orderID, Date orderDateTime, Date prepareDateTime, String dispatchType, String orderType,
+	public Orders(String orderID, String orderDateTime, String prepareDateTime, String dispatchType, String orderType,
 			int orderTotal, int discount, String paymentMode, String orderStatus, String customerNote,
-			List<OrderItem> orderItems, Customer customer) {
+			Set<OrderItem> orderItems, Customer customer) {
 		super();
 		this.orderID = orderID;
 		this.orderDateTime = orderDateTime;
@@ -78,19 +81,19 @@ public class Order {
 		this.orderID = orderID;
 	}
 
-	public Date getOrderDateTime() {
+	public String getOrderDateTime() {
 		return orderDateTime;
 	}
 
-	public void setOrderDateTime(Date orderDateTime) {
+	public void setOrderDateTime(String orderDateTime) {
 		this.orderDateTime = orderDateTime;
 	}
 
-	public Date getPrepareDateTime() {
+	public String getPrepareDateTime() {
 		return prepareDateTime;
 	}
 
-	public void setPrepareDateTime(Date prepareDateTime) {
+	public void setPrepareDateTime(String prepareDateTime) {
 		this.prepareDateTime = prepareDateTime;
 	}
 
@@ -150,11 +153,11 @@ public class Order {
 		this.customerNote = customerNote;
 	}
 
-	public List<OrderItem> getOrderItems() {
+	public Set<OrderItem> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<OrderItem> orderItems) {
+	public void setOrderItems(Set<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
 
@@ -168,12 +171,12 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [orderID=" + orderID + ", orderDateTime=" + orderDateTime + ", prepareDateTime=" + prepareDateTime
+		return "Orders [orderID=" + orderID + ", orderDateTime=" + orderDateTime + ", prepareDateTime=" + prepareDateTime
 				+ ", dispatchType=" + dispatchType + ", orderType=" + orderType + ", orderTotal=" + orderTotal
 				+ ", discount=" + discount + ", paymentMode=" + paymentMode + ", orderStatus=" + orderStatus
 				+ ", customerNote=" + customerNote + ", orderItems=" + orderItems + ", customer=" + customer + "]";
 	}
-	
+
 	
 	
 

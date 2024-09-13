@@ -1,8 +1,10 @@
 package com.api.roms.controllers;
 
+import java.util.List;
 import java.util.Set;
 
 import org.apache.coyote.http11.Http11InputBuffer;
+import org.hibernate.query.NativeQuery.ReturnableResultNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -54,5 +57,13 @@ public class OrderController {
 		return new ResponseEntity<Orders>(savedOrder,HttpStatus.CREATED);
 	}
 	
+	//get all orders
+	@GetMapping("/orders/all")
+	public ResponseEntity<List<Orders>> getAllOrders(){
+		
+		List<Orders> allOrdersList = this.orderServiceImpl.getOrders();
+		
+		return ResponseEntity.ok(allOrdersList);
+	}
 
 }

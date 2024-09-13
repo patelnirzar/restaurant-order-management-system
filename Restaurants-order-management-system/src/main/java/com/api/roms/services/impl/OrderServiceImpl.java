@@ -36,6 +36,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private CustomerRepo customerRepo;
 
+	//create new order
 	@Override
 	public Orders createOrder(Orders orders) {
 		
@@ -79,5 +80,16 @@ public class OrderServiceImpl implements OrderService {
 
 		return savedOrder;
 	}
+
+	//get all orders 
+	@Override
+	public List<Orders> getOrders() {
+		
+		List<Orders> allOrdersList = this.orderRepo.findAll();
+		
+		return allOrdersList;
+	}
+	
+	
 
 }

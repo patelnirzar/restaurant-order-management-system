@@ -38,7 +38,7 @@ public class Item {
 	@JoinColumn(name = "cat_id")
 	private Category category;
 
-	@OneToMany(mappedBy = "item",cascade =CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "item",cascade =CascadeType.ALL,fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Set<OrderItem> orderItems= new HashSet<OrderItem>();
 

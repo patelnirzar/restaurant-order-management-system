@@ -28,11 +28,11 @@ public class OrderItem {
 	private int qty;
 	private double total;
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "item_id")
 	private Item item;
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name = "order_id")
 	private Orders orders;
 

@@ -11,6 +11,8 @@ import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
 public class CustomOrderIdGenerator implements IdentifierGenerator {
+	
+	private int lastNumber = 0;
 
 	@Override
 	public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
@@ -27,8 +29,29 @@ public class CustomOrderIdGenerator implements IdentifierGenerator {
 					if (lastId != null) {
 						System.out.println("lastid :"+lastId);
 						int number = Integer.parseInt(lastId.substring(prefix.length())) + 1;
+						
 						System.out.println("num:"+number);
-						return prefix + number;
+						
+						if(lastNumber == number) {
+							number++;
+							lastNumber++;
+						}
+						else if (number < lastNumber) {
+							lastNumber++;
+							number = lastNumber;
+						}
+						else {
+							lastNumber=number;
+						}
+						
+						
+						if(number <= 9) {
+							return prefix + "0"+ number;
+						}
+						else {
+							return prefix + number;
+						}
+					
 					}
 				}
 			} catch (SQLException e) {

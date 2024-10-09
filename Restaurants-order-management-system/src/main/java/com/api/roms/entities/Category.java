@@ -28,7 +28,7 @@ public class Category {
 	private String catID;
 	private String catName;
 	
-	@OneToMany(mappedBy = "category",cascade =CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "category",cascade =CascadeType.ALL,fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<Item> items= new ArrayList<Item>();
 	
@@ -60,6 +60,7 @@ public class Category {
 		this.catName = catName;
 	}
 
+	@JsonIgnore
 	public List<Item> getItems() {
 		return items;
 	}

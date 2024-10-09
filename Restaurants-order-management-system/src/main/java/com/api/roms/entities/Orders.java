@@ -46,7 +46,7 @@ public class Orders {
 	@OneToMany(mappedBy = "orders",cascade =CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<OrderItem> orderItems= new HashSet<OrderItem>();
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToOne()
 	@JoinColumn(name = "cust_id")
 	private Customer customer;
 

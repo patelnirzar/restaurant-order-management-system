@@ -105,6 +105,16 @@ public class OrderServiceImpl implements OrderService {
 	public List<Orders> getOrders() {
 
 		List<Orders> allOrdersList = this.orderRepo.findAll();
+		
+		List<Orders> cancelledOrders = new ArrayList<Orders>();
+		
+		for (Orders orders : allOrdersList) {
+			if(orders.getOrderStatus().equals("Cancelled")) {
+				cancelledOrders.add(orders);
+			}
+		}
+		
+		allOrdersList.removeAll(cancelledOrders);
 
 		return allOrdersList;
 	}

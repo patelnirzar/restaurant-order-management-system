@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "bfe3f575-0be5-4cf8-ac8e-0f441bdd4afc",
+		"name": "Restaurant order management system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login/Register",
+			"item": [
+				{
+					"name": "Login",
+					"id": "aa7c58e1-e3bc-4438-b7e1-f230d1b75c1b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"biller1\",\n    \"password\":\"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:9292/api/v1/auth/login"
+					},
+					"response": []
+				}
+			],
+			"id": "69619085-cce3-4afd-a23a-3311bd2766b9"
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "Create New Order",
+							"id": "4b43c43a-5c29-47d4-abfb-3ef70213ea0b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"prepareDateTime\": \"2024-09-30T00:14\",\n  \"dispatchType\": \"Delivery\",\n  \"orderType\": \"Advance\",\n  \"orderTotal\": 2197,\n  \"discount\": \"100\",\n  \"paymentMode\": \"UPI\",\n  \"customerNote\": \"abc\",\n  \"orderItems\": [\n      {\n        \"qty\": 1,\n        \"total\": 799,\n        \"item\": {\n          \"itemId\": \"item6\",\n          \"name\": \"Blueberry Cheesecake\",\n          \"size\": \"500gm\",\n          \"price\": 699\n        }\n      },\n      {\n        \"qty\": 2,\n        \"total\": 1398,\n        \"item\": {\n          \"itemId\": \"item2\",\n          \"name\": \"Strawberry Cheesecake\",\n          \"size\": \"500gm\",\n          \"price\": 699\n        }\n      }\n  ],\n  \"customer\": {\n    \"name\": \"Nirzar patel\",\n    \"contact\": \"9998467235\",\n    \"address\": \"2, Kirti Colony Ln, Shanti Nagar, Usmanpura, Ahmedabad, Gujarat 380013, India\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:9292/api/v1/user/order/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all orders",
+							"id": "cd673942-1b62-468c-a629-fb51b400ece7",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "localhost:9292/api/v1/user/orders/all"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all orders by customer",
+							"id": "db8d3790-ee46-471c-8752-fd025e20a2a2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "localhost:9292/api/v1/user/orders/cust1"
+							},
+							"response": []
+						}
+					],
+					"id": "b0bf00c5-760d-4f1c-a7ea-2efdcbf7f46e"
+				},
+				{
+					"name": "Items",
+					"item": [
+						{
+							"name": "Get All Items",
+							"id": "7174de9f-fcd1-497a-85f5-e9c1cc024e1f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "localhost:9292/api/v1/user/items"
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Items Category Wise",
+							"id": "38360cbd-93ce-404d-b93f-e3db4e6ab783",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "localhost:9292/api/v1/user/items/cat1"
+							},
+							"response": []
+						}
+					],
+					"id": "d9fba79c-4e83-4a19-b5eb-16e79fcd5461"
+				},
+				{
+					"name": "UserHome",
+					"id": "966deac4-1b4e-4cfc-9901-c3e509a8f76a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:9292/api/v1/user/home"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Categories",
+					"id": "7ab7923e-d90a-4a9a-9687-4cfe84e8bb0f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:9292/api/v1/user/categories"
+					},
+					"response": []
+				}
+			],
+			"id": "e887180e-101b-4367-88d0-42b187bf08a4"
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "create user",
+					"id": "7d923444-bbf6-4be3-a266-1f454c28dd35",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Sagar\",\n    \"email\":\"sagar@dev.com\",\n    \"password\":\"sagar\",\n    \"contact\":\"1234567890\",\n    \"userRoles\":[\n        {\n            \"id\": 501\n        }\n    ]\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:9292/api/v1/admin/user/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"id": "a8a565e6-d732-4ee3-a336-c869af705f7b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"catName\":\"Tarts\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:9292/api/v1/admin/category/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Item",
+					"id": "60a90e20-82fd-43c0-a29e-a8e5bddaddfc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Lotus Biscoff Cheesecake\",\n    \"price\":999,\n    \"size\":\"500gm\",\n    \"category\":{\n        \"catID\":\"cat1\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:9292/api/v1/admin/item/add"
+					},
+					"response": []
+				}
+			],
+			"id": "0e333f2f-e4f0-4480-a52a-1cfc02c1c24a"
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": {
+			"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiaWxsZXIxIiwiaWF0IjoxNzI4ODkxOTk0LCJleHAiOjE3Mjg5MDk5OTR9.GXqGYBQPOEaG_S3gWpdlnQSe3p66m9koB6F8tm1Jgiz6j_xtVrNa3mpTeCKFa1x_fqP-atn5PA964GR7Lts8bg",
+			"key": "Authorization",
+			"in": "header"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "19e8d81a-0e65-4e11-b116-cab074ae359e",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fa54af9d-6226-4f9f-9474-cc746cb4f945",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
